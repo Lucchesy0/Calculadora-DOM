@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalculadoraDOM</title>
+    <style>
+
+
+        *{
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px;
+            background-color: hsl(0, 0%, 80%);
+            
+
+        }
+
+        #Calculadora{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: hsl(0, 0%, 15%);
+            border-radius: 15px;
+            max-width: 500px;
+            overflow: hidden;
+
+        }
+
+        #display{
+            width: 100%;
+            padding: 20px;
+            font-size: 5rem;
+            border: none;
+            background-color: hsl(0, 0%, 25%);
+            color: white;
+            text-align: right;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            
+    
+        }
+
+        #keys{
+            display: grid; 
+            grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+            padding: 20px;
+        }
+
+        button{
+             width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            border: none;
+            background-color: hsl(0, 0%, 30%);
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: hsl(0, 0%, 40%);
+            box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active{
+            background-color: hsl(0, 0%, 50%);
+            transform: scale(0.90);
+
+        }
+
+        .operação{
+            background-color: rgb(130, 4, 161);
+        }
+
+        .operação:hover{
+            background-color: rgb(145, 7, 71);
+        }
+
+        .operação:active{
+            background-color: rgb(243, 112, 188);
+
+        }
+
+        .igual{
+            grid-column: span 4;
+            width: 100%;
+            background-color: rgb(130, 4, 161);
+
+            
+        }
+        .igual:hover{
+            background-color: rgb(194, 73, 224);
+        }
+        .igual:active{
+            background-color: rgb(46, 248, 39);
+        }
+
+        @media (max-width: 600px){
+            #display {
+                font-size: 2.5rem;
+                padding: 15px;
+            }
+            button {
+                font-size: 1.5rem; 
+                padding: 10px;
+            }
+            #keys{
+                gap:8px;
+            }
+
+        }
+            
+    </style>
+
+</head>
+<body>
+    <div id="Calculadora">
+        <input id="display" readonly>
+        <div id="keys">
+            
+            <button onclick="appendToDisplay('7')" >7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="clearDisplay()"class="operação">C</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('+')" class="operação">+</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('-')" class="operação">-</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="appendToDisplay('/')"class="operação">/</button>
+            <button onclick="appendToDisplay('*')" class="operação">*</button>
+            <button onclick="calcular()" class="igual">=</button>
+
+        </div>
+    </div>
+    <script>
+
+        const display = document.getElementById("display");
+
+        function appendToDisplay(input){
+             display.value += input;
+        }
+            function clearDisplay(){
+                display.value = "";
+        }
+
+            function appendToDisplay(value) {
+             if (display.value === "Erro" || display.value === "Error") {
+                 display.value = "";
+                }
+        display.value += value;
+        }
+
+        function calcular(){
+            try{
+                
+                let resultado = eval(display.value);
+        
+
+            if (!Number.isInteger(resultado)){
+                resultado = resultado.toFixed(4);
+                }
+
+          
+             display.value = resultado;
+            }
+
+            catch(error){
+                display.value = "Error"
+            }
+            
+        }
+    
+    </script>
+</body>
+</html
